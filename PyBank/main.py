@@ -2,28 +2,32 @@ import os
 import csv
 
 #Reading csv with csv module
-csvpath = os.path.join('Resources', 'budget_data.csv')
-with open(csvpath) as csvfile:
+CSV_PATH= os.path.join('Resources', 'budget_data.csv')
+
+#setting variables
+MONTH_IDX = 0
+PROFIT_IDX = 1
+
+profit_loss = 0
+previous = 0
+changes = 0
+month_count = 0
+total_profit_loss = 0
+i = 0
+
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+with open(CSV_PATH) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    #print(csvreader)
-
-    #store data header
     csv_header = next(csvreader)
-    #print(f"CSV Header: {csv_header}")
-
-    #Lists to store data
-    months = []
-    net_total = []
-    changes = []
-    previous = []
+    #print(f"CSV Header:{csv_header}")
     
-    #Loop through the entire list to count each month
-    next(csvfile)
-
-    total = len(months)
-    for month in months:
-        total += month
-    print(total)      
-
+    for row in csvreader:
+        month_count += 1
+        current_month = row[MONTH_IDX]
+        current_profit = int(row[PROFIT_IDX])
+        #print(current_month, current_profit, type(current_profit))
+    print(month_count)
     
+
+        
 
